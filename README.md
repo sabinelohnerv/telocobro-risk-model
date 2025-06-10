@@ -1,3 +1,4 @@
+
 # 📊 API de Riesgo de Morosidad
 
 Esta API predice si un cliente tiene alto riesgo de impago, utilizando un modelo de árbol de decisión entrenado previamente. Está construida con **FastAPI**, es modular, y utiliza autenticación mediante **API Key**.
@@ -27,78 +28,76 @@ El modelo fue entrenado con las siguientes características:
 
 ## 📁 Estructura del proyecto
 
+```
 risk_model_api/
 ├── main.py
 ├── .env
 ├── requirements.txt
 ├── saved_model/
-│ └── model.pkl
+│   └── model.pkl
 ├── routers/
-│ └── predict.py
+│   └── predict.py
 ├── models/
-│ └── schemas.py
+│   └── schemas.py
 ├── services/
-│ └── model_service.py
+│   └── model_service.py
 ├── utils/
-│ └── security.py
-
-yaml
-Copy
-Edit
+│   └── security.py
+```
 
 ---
 
 ## 🛠️ Instalación y ejecución
 
 1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/tu_usuario/risk_model_api.git
-   cd risk_model_api
-Crea y activa un entorno virtual:
+```bash
+git clone https://github.com/tu_usuario/risk_model_api.git
+cd risk_model_api
+```
 
-bash
-Copy
-Edit
+2. Crea y activa un entorno virtual:
+```bash
 python -m venv venv
 source venv/bin/activate  # o venv\Scripts\activate en Windows
-Instala dependencias:
+```
 
-bash
-Copy
-Edit
+3. Instala dependencias:
+```bash
 pip install -r requirements.txt
-Crea el archivo .env con tu clave de API:
+```
 
-ini
-Copy
-Edit
+4. Crea el archivo `.env` con tu clave de API:
+```ini
 API_KEY=tu_api_key_secreta
-Coloca tu modelo entrenado en saved_model/model.pkl.
+```
 
-Ejecuta el servidor:
+5. Coloca tu modelo entrenado en `saved_model/model.pkl`.
 
-bash
-Copy
-Edit
+6. Ejecuta el servidor:
+```bash
 uvicorn main:app --reload
-🧪 Cómo probar
-Swagger UI:
+```
+
+---
+
+## 🧪 Cómo probar
+
+### Swagger UI
 Abre en tu navegador:
 
-bash
-Copy
-Edit
+```
 http://localhost:8000/docs
-Presiona Authorize e ingresa tu API Key como:
+```
 
-makefile
-Copy
-Edit
+Presiona **Authorize** e ingresa tu API Key como:
+
+```
 x-api-key: tu_api_key_secreta
-Ejemplo de JSON para /predict:
-json
-Copy
-Edit
+```
+
+### Ejemplo de JSON para `/predict`:
+
+```json
 {
   "totalDebtBOB": 12000,
   "totalPendingDebtBOB": 5000,
@@ -106,17 +105,26 @@ Edit
   "paymentDelayRate": 0.33,
   "debtCount": 7
 }
-Respuesta esperada:
-json
-Copy
-Edit
+```
+
+### Respuesta esperada:
+
+```json
 {
   "prediction": 1,
   "probability": 0.65,
   "threshold": 0.4
 }
-📦 Variables de entorno
-API_KEY: Clave secreta para proteger la API.
+```
 
-🔐 Seguridad
-Esta API implementa autenticación por API Key mediante header x-api-key. No se permite el acceso sin clave válida.
+---
+
+## 📦 Variables de entorno
+
+- `API_KEY`: Clave secreta para proteger la API.
+
+---
+
+## 🔐 Seguridad
+
+Esta API implementa autenticación por **API Key** mediante el header `x-api-key`. No se permite el acceso sin clave válida.
