@@ -4,7 +4,7 @@ venv/
 
 # Archivos de entorno
 *.env
-.env.*
+.env
 .envrc
 
 # Cachés y compilados de Python
